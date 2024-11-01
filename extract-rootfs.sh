@@ -3,7 +3,7 @@ set -e
 
 source .env
 
-DEVICE=oneplus fajita
+DEVICE=oneplus6
 IMAGE=$(basename -s .raw.xz ${OPENSUSE_RAW_FILE})
 
 # Functions
