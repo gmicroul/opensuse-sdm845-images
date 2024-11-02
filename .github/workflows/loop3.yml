@@ -1,0 +1,27 @@
+name: Build and Test
+on:
+  repository_dispatch:
+  workflow_dispatch:
+#on:
+#  push:
+#    branches:
+#      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - run: |
+        sudo bash all.sh
+         
+      
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.3.0
+      with:
+        name: 'oneplus6'
+        path: './*.img'
+        
