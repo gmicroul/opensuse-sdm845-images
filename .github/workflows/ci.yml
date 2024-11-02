@@ -16,19 +16,7 @@ jobs:
       uses: actions/checkout@v3
     
     - run: |
-         git clone https://github.com/gmicroul/opensuse-sdm845-images
-         cd opensuse-sdm845-images
-         #sudo chown runner:docker opensuse-sdm845-images/openSUSE-Tumbleweed-ARM-PHOSH-oneplus6.aarch64.raw.xz
-         pwd
-         ls -ltr
-         whoami
-         su - runner -c "./download-image.sh"
-         pwd
-         ls -ltr
-         su - runner -c "./mount-images.sh"
-         su - runner -c "./bootloader.sh"
-         su - runner -c "./umount-images.sh"
-         su - runner -c "./extract-rootfs.sh"
+         sudo bash all.sh
          
       
     - name: Upload a Build Artifact
