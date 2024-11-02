@@ -19,7 +19,7 @@ jobs:
          pwd
          ls -ltr
          whoami
-         bash download-image.sh
+         sudo bash download-image.sh
          pwd
          ls -ltr
          sudo bash mount-images.sh
