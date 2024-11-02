@@ -17,7 +17,7 @@ jobs:
     
     - run: |
          git clone https://github.com/gmicroul/opensuse-sdm845-images
-         sudo chown root:root opensuse-sdm845-images
+         sudo chown runner:docker opensuse-sdm845-images/openSUSE-Tumbleweed-ARM-PHOSH-oneplus6.aarch64.raw.xz
          cd opensuse-sdm845-images
          pwd
          ls -ltr
