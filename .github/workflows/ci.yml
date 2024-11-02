@@ -15,17 +15,17 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
     
-    - run: sudo bash all.sh
-         #pwd
-         #ls -ltr
-         #whoami
-         #bash download-image.sh
-         #pwd
-         #ls -ltr
-         #sudo bash mount-images.sh
-         #sudo bash bootloader.sh
-         #sudo bash umount-images.sh
-         #sudo bash extract-rootfs.sh
+    - run: |
+         pwd
+         ls -ltr
+         whoami
+         bash download-image.sh
+         pwd
+         ls -ltr
+         sudo bash mount-images.sh
+         sudo bash bootloader.sh
+         sudo bash umount-images.sh
+         sudo bash extract-rootfs.sh
          
       
     - name: Upload a Build Artifact
