@@ -16,6 +16,8 @@ jobs:
       uses: actions/checkout@v2
     
     - run: |
+        sudo apt update
+        sudo apt install abootimg
         sudo bash all.sh
          
       
