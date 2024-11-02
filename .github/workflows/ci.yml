@@ -16,12 +16,16 @@ jobs:
       uses: actions/checkout@v3
     
     - run: |
-         #bash all.sh
-         bash download-image.sh
-         bash mount-images.sh
-         bash bootloader.sh
-         bash umount-images.sh
-         bash extract-rootfs.sh
+         pwd
+         ls -ltr
+         whoami
+         sudo bash download-image.sh
+         pwd
+         ls -ltr
+         sudo bash mount-images.sh
+         sudo bash bootloader.sh
+         sudo bash umount-images.sh
+         sudo bash extract-rootfs.sh
          
       
     - name: Upload a Build Artifact
