@@ -19,6 +19,8 @@ if test -f "$OPENSUSE_RAW_FILE"; then
 fi
 
 infecho "Mounting the image to loop..."
+losetup
+losetup -d /dev/loop0
 losetup /dev/loop0 $( basename -s .xz ${OPENSUSE_RAW_FILE})
 partprobe -s /dev/loop0
 
