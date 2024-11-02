@@ -19,7 +19,7 @@ jobs:
          pwd
          ls -ltr
          whoami
-         bash all.sh"
+         bash all.sh
          
       
     - name: Upload a Build Artifact
