@@ -19,7 +19,11 @@ jobs:
          pwd
          ls -ltr
          whoami
-         bash all.sh
+         sudo bash /home/runner/work/opensuse-sdm845-images/opensuse-sdm845-images/download-image.sh
+         sudo bash /home/runner/work/opensuse-sdm845-images/opensuse-sdm845-images/mount-image.sh
+         sudo bash /home/runner/work/opensuse-sdm845-images/opensuse-sdm845-images/bootloader.sh
+         sudo bash /home/runner/work/opensuse-sdm845-images/opensuse-sdm845-images/umount-image.sh
+         sudo bash /home/runner/work/opensuse-sdm845-images/opensuse-sdm845-images/extract-rootfs.sh
          
       
     - name: Upload a Build Artifact
