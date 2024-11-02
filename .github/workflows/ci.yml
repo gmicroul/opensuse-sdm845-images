@@ -17,6 +17,7 @@ jobs:
     
     - run: |
          git clone https://github.com/gmicroul/opensuse-sdm845-images
+         sudo chown root:root opensuse-sdm845-images
          cd opensuse-sdm845-images
          pwd
          ls -ltr
