@@ -17,7 +17,7 @@ jobs:
     
     - run: |
         sudo apt update
-        sudo apt install abootimg
+        sudo apt install abootimg img2simg
         sudo bash all.sh
          
       
