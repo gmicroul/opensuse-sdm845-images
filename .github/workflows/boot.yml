@@ -1,4 +1,4 @@
-name: Build and Test loop3
+name: Build and Test loop3-boot
 on:
   repository_dispatch:
   workflow_dispatch:
