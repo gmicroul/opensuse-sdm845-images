@@ -13,8 +13,8 @@ echo "ROOTPART: ${ROOTPART}"
 case "${DEVICE}" in
     "oneplus6")
         DTB_VENDOR="oneplus"
-        #DTB_VARIANTS="enchilada fajita"
-        DTB_VARIANTS="fajita"
+        DTB_VARIANTS="enchilada fajita"
+        #DTB_VARIANTS="fajita"
         ;;
     "pocof1")
         DTB_VENDOR="xiaomi"
