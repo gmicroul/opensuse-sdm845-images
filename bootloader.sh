@@ -31,7 +31,8 @@ for variant in ${DTB_VARIANTS}; do
 
     # Append DTB to kernel
     ls -ltr ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/
-    cat ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image.gz ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb > /tmp/kernel-dtb
+    cat ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb > /tmp/kernel-dtb
+    # cat ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image.gz ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb > /tmp/kernel-dtb
 
     # Create the bootimg as it's the only format recognized by the Android bootloader
     abootimg --create ./openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img -c kerneladdr=0x8000 \
