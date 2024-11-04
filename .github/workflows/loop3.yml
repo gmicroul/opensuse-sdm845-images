@@ -17,7 +17,7 @@ jobs:
     
     - run: |
         sudo apt update
-        sudo apt install abootimg img2simg mkbootimg
+        sudo apt install abootimg img2simg android-tools-mkbootimg
         sudo bash all.sh
          
       
