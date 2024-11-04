@@ -24,6 +24,6 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.0
       with:
-        name: 'openSUSE-Tumbleweed-ARM-PLAMO-oneplus6'
+        name: 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6'
         path: './*.img'
         
