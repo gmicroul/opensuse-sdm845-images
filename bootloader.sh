@@ -33,7 +33,7 @@ for variant in ${DTB_VARIANTS}; do
     cat ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image.gz ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb > /tmp/kernel-dtb
 
     # Create the bootimg as it's the only format recognized by the Android bootloader
-    abootimg --create ./openSUSE-Tumbleweed-ARM-PLAMO-${DEVICE}${variant}.aarch64.boot.img -c kerneladdr=0x8000 \
+    abootimg --create ./openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img -c kerneladdr=0x8000 \
         -c ramdiskaddr=0x1000000 -c secondaddr=0x0 -c tagsaddr=0x100 -c pagesize=4096 \
         -c cmdline="BOOT_IMAGE=/boot/Image root=${ROOTPART} quiet splash" \
         -k /tmp/kernel-dtb -r ${MOUNTED_IMAGE_DIR}/boot/initrd
