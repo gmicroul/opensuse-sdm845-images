@@ -22,6 +22,7 @@ jobs:
         cd mkbootimg
         make
         sudo make install
+        cd ..
         sudo bash all.sh
          
       
