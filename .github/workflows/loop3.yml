@@ -24,11 +24,12 @@ jobs:
         sudo make install
         cd ..
         sudo bash all.sh
+        ls -ltrh
          
       
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.0
       with:
         name: 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6'
-        path: './*boot.img'
+        path: './*boot*.img'
         
