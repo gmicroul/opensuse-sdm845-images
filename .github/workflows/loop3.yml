@@ -32,21 +32,3 @@ jobs:
       with:
         name: 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6'
         path: './*.img'
-        
-    #- name: Download the release artifact
-    #  uses: actions/download-artifact@v4
-    #  with:
-    #    #name: release-${{ github.event.inputs.release }}
-    #    name: 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6'
-    #    path: './*.img' 
-
-    - name: upload release artifact
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./openSUSE-Tumbleweed-ARM-PHOSH-oneplus6.zip
-        asset_name: openSUSE-Tumbleweed-ARM-PHOSH-oneplus6.zip
-        asset_content_type: application/zip
-        
