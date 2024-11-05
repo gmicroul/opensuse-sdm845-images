@@ -33,3 +33,10 @@ jobs:
         name: 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6'
         path: './*.img'
         
+    - name: Download the release artifact
+      uses: actions/download-artifact@v4
+      with:
+        #name: release-${{ github.event.inputs.release }}
+        name: 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6'
+        path: './*.img'  
+        
