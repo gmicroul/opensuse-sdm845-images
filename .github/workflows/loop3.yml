@@ -42,9 +42,9 @@ jobs:
       uses: ncipollo/release-action@main
       if: steps.compile.outputs.status == 'success' && !cancelled()
       with:
-        tag: Linux_Kernel_${{ env.COMPILE_STARTINGTIME }}
-        artifacts: /workdir/*.img
+        tag: opensuse_PHOSH_fajita_${{ env.COMPILE_STARTINGTIME }}
+        artifacts: ./*.img
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
         body: |
-          This is Linux Kernel ${{ env.LINUX_GITURL }}
+          This is opensuse image for fajita ${{ env.LINUX_GITURL }}
