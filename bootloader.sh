@@ -42,7 +42,7 @@ for variant in ${DTB_VARIANTS}; do
     #    -c cmdline="BOOT_IMAGE=/boot/Image root=${ROOTPART} quiet splash" \
     #    -k /tmp/kernel-dtb -r ${MOUNTED_IMAGE_DIR}/boot/initrd-6.11.0-36.gb87e886-sdm845
 
-    mkbootimg --kernel ${MOUNTED_IMAGE_DIR}/boot/Image-6.11.0-36.gb87e886-sdm845 --dtb ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb --pagesize 4096 \
+    mkbootimg --kernel ${MOUNTED_IMAGE_DIR}/boot/Image-6.11.0-37.gb87e886-sdm845 --dtb ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb --pagesize 4096 \
         --base 0x00000000 --kernel_offset 0x00008000 --second_offset 0x00f00000 --tags_offset 0x00000100 \
         --cmdline "root=/dev/block/sda21" --output bootimg-${variant}.img
 
