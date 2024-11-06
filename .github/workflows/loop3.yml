@@ -43,7 +43,7 @@ jobs:
       if: steps.compile.outputs.status == 'success' && !cancelled()
       with:
         tag: opensuse_PHOSH_fajita_${{ env.COMPILE_STARTINGTIME }}
-        artifacts: ./*.img
+        artifacts: ./*
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
         body: |
