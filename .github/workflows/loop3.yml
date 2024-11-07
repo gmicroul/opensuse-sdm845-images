@@ -28,23 +28,8 @@ jobs:
          
       
     - name: Upload a Build Artifact
-      id: compile
+      #id: compile
       uses: actions/upload-artifact@v4.3.0
       with:
         name: 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6'
         path: './*.img'
-        run: |
-          echo "::set-output name=status::success"
-          ls -ltrh
-
-
-    - name: Upload image to Release
-      uses: ncipollo/release-action@main
-      if: steps.compile.outputs.status == 'success' && !cancelled()
-      with:
-        tag: opensuse_PHOSH_fajita_${{ env.COMPILE_STARTINGTIME }}
-        artifacts: ./*
-        allowUpdates: true
-        token: ${{ secrets.GITHUB_TOKEN }}
-        body: |
-          This is opensuse image for fajita ${{ env.LINUX_GITURL }}
