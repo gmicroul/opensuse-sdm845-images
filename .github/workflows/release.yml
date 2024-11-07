@@ -81,7 +81,7 @@ jobs:
         run: mkdir -p /tmp/build-results
 
       - name: Download official rootfs
-        run: wget -P data/ https://download.opensuse.org/repositories/home:/alefnode:/GSI-Phone/images/openSUSE-Tumbleweed-ARM-PHOSH.aarch64-gsi-volla-yggdrasil.aarch64.tar.xz
+        run: wget -P data/ https://download.opensuse.org/repositories/home:/alefnode:/sdm845/images/openSUSE-Tumbleweed-ARM-PHOSH-oneplus6.aarch64-2024.11.04-Build71.3.raw.xz
 
       - name: Create ZIP file to flash with Recovery
         run: zip -r /tmp/build-results/openSUSE-Tumbleweed-ARM-PHOSH.aarch64-gsi-volla-yggdrasil.aarch64${{ env.release_suffix }}.zip *
