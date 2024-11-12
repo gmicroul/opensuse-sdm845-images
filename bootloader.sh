@@ -31,6 +31,7 @@ for variant in ${DTB_VARIANTS}; do
     echo "Creating boot image for variant ${variant}"
 
     # Append DTB to kernel
+    echo "ls -ltrh ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/"
     ls -ltrh ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/
     cat ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb > /tmp/kernel-dtb
     # cat ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image.gz ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb > /tmp/kernel-dtb
