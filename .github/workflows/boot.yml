@@ -18,7 +18,13 @@ jobs:
     - run: |
         sudo apt update
         sudo apt install abootimg img2simg
+        git clone https://github.com/osm0sis/mkbootimg
+        cd mkbootimg
+        make
+        sudo make install
+        cd ..
         sudo bash all.sh
+        ls -ltrh
          
       
     - name: Upload a Build Artifact
