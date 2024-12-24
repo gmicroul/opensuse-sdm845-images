@@ -33,3 +33,13 @@ jobs:
       with:
         name: 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6'
         path: './*.img'
+      
+    - name: Upload image to Release
+      uses: ncipollo/release-action@main
+      with:
+        tag: opensuse_for_fajita
+        artifacts: './*.img'
+        allowUpdates: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        body: |
+            opensuse_for_fajita
