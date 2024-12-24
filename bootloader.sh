@@ -39,11 +39,17 @@ for variant in ${DTB_VARIANTS}; do
     ls -ltrh imgfs/boot/
     echo "ls -ltrh /tmp/kernel-dtb"
     ls -ltrh /tmp/kernel-dtb
+    
+    #abootimg --create ./openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img -c kerneladdr=0x8000 \
+    #    -c ramdiskaddr=0x1000000 -c secondaddr=0x0 -c tagsaddr=0x100 -c pagesize=4096 \
+    #    -c cmdline="BOOT_IMAGE=/boot/Image root=${ROOTPART} quiet splash" \
+    #    -k /tmp/kernel-dtb -r ${MOUNTED_IMAGE_DIR}/boot/initrd-6.11.0-*-sdm845
+    
     # Create the bootimg as it's the only format recognized by the Android bootloader
     abootimg --create ./openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img -c kerneladdr=0x8000 \
         -c ramdiskaddr=0x1000000 -c secondaddr=0x0 -c tagsaddr=0x100 -c pagesize=4096 \
         -c cmdline="BOOT_IMAGE=/boot/Image root=${ROOTPART} quiet splash" \
-        -k /tmp/kernel-dtb -r ${MOUNTED_IMAGE_DIR}/boot/initrd-6.11.0-*-sdm845
+        -k ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image -r ${MOUNTED_IMAGE_DIR}/boot/initrd-6.11.0-*-sdm845
 
     #mkbootimg --kernel ${MOUNTED_IMAGE_DIR}/boot/Image-6.11.0-*-sdm845 --dtb ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb --pagesize 4096 \
     #    --base 0x00000000 --kernel_offset 0x00008000 --second_offset 0x00f00000 --tags_offset 0x00000100 \
