@@ -53,6 +53,6 @@ for variant in ${DTB_VARIANTS}; do
 
     mkbootimg --kernel ${MOUNTED_IMAGE_DIR}/boot/initrd-6.11.0-*-sdm845 --dtb ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb --pagesize 4096 \
         --base 0x00000000 --kernel_offset 0x00008000 --second_offset 0x00f00000 --tags_offset 0x00000100 \
-        --cmdline "BOOT_IMAGE=/boot/Image root=${ROOTPART} quiet splash" --output bootimg-${variant}.img
+        --cmdline "BOOT_IMAGE=/boot/Image root=${ROOTPART} quiet splash" --output ./openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img
 
 done
