@@ -25,6 +25,11 @@ jobs:
         cd ..
         sudo bash all.sh
         ls -ltrh
+        pwd
+        mkdir tempzip
+        mv *oneplus6*.img tempzip
+        pwd
+        ls -ltrh
          
       
     - name: Upload a Build Artifact
