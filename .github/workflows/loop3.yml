@@ -27,7 +27,9 @@ jobs:
         ls -ltrh
         pwd
         mkdir tempzip
-        mv *oneplus6*.img tempzip
+        mv *oneplus6*.img tempzip/
+        cd tempzip
+        zip openSUSE-Tumbleweed-ARM-PHOSH-oneplus6t.zip *oneplus6*.img
         pwd
         ls -ltrh
          
@@ -37,13 +39,13 @@ jobs:
       uses: actions/upload-artifact@v4.3.0
       with:
         name: 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6'
-        path: './*.img'
+        path: './tempzip/openSUSE-Tumbleweed-ARM-PHOSH-oneplus6t.zip'
       
     - name: Upload image to Release
       uses: ncipollo/release-action@main
       with:
         tag: opensuse_for_fajita
-        artifacts: './*.zip'
+        artifacts: './tempzip/openSUSE-Tumbleweed-ARM-PHOSH-oneplus6t.zip'
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
         body: |
