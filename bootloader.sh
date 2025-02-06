@@ -13,8 +13,7 @@ echo "ROOTPART: ${ROOTPART}"
 case "${DEVICE}" in
     "oneplus6")
         DTB_VENDOR="oneplus"
-        #DTB_VARIANTS="enchilada fajita"
-        DTB_VARIANTS="fajita"
+        DTB_VARIANTS="enchilada fajita"
         ;;
     "pocof1")
         DTB_VENDOR="xiaomi"
@@ -26,33 +25,25 @@ case "${DEVICE}" in
         ;;
 esac
 
+kernel_version=$(ls ${MOUNTED_IMAGE_DIR}/usr/lib/modules/)
+gzip -9 -k ${MOUNTED_IMAGE_DIR}/usr/lib/modules/${kernel_version}/Image
+
 # Create a bootimg for each variant
 for variant in ${DTB_VARIANTS}; do
     echo "Creating boot image for variant ${variant}"
 
     # Append DTB to kernel
-    echo "ls -ltrh ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/"
-    ls -ltrh ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/
-    cat ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb > /tmp/kernel-dtb
-    # cat ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image.gz ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb > /tmp/kernel-dtb
-    echo "ls -ltrh imgfs/boot/"
-    ls -ltrh imgfs/boot/
-    echo "ls -ltrh /tmp/kernel-dtb"
-    ls -ltrh /tmp/kernel-dtb
-    
-    #abootimg --create ./openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img -c kerneladdr=0x8000 \
-    #    -c ramdiskaddr=0x1000000 -c secondaddr=0x0 -c tagsaddr=0x100 -c pagesize=4096 \
-    #    -c cmdline="BOOT_IMAGE=/boot/Image root=${ROOTPART} quiet splash" \
-    #    -k /tmp/kernel-dtb -r ${MOUNTED_IMAGE_DIR}/boot/initrd-6.11.0-*-sdm845
-    
-    # Create the bootimg as it's the only format recognized by the Android bootloader
-    #abootimg --create ./openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img -c kerneladdr=0x8000 \
-    #    -c ramdiskaddr=0x1000000 -c secondaddr=0x0 -c tagsaddr=0x100 -c pagesize=4096 \
-    #    -c cmdline="BOOT_IMAGE=/boot/Image root=${ROOTPART} quiet splash" \
-    #    -k ${MOUNTED_IMAGE_DIR}/usr/lib/modules/*-sdm845/Image -r ${MOUNTED_IMAGE_DIR}/boot/initrd-6.11.0-*-sdm845
+    cat ${MOUNTED_IMAGE_DIR}/usr/lib/modules/${kernel_version}/Image.gz ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb > /tmp/kernel-dtb
 
-    mkbootimg --kernel ${MOUNTED_IMAGE_DIR}/boot/initrd-6.11.0-*-sdm845 --dtb ${MOUNTED_IMAGE_DIR}/boot/dtb/qcom/sdm845-${DTB_VENDOR}-${variant}.dtb --pagesize 4096 \
-        --base 0x00000000 --kernel_offset 0x00008000 --second_offset 0x00f00000 --tags_offset 0x00000100 \
-        --cmdline "BOOT_IMAGE=/boot/Image root=${ROOTPART} quiet splash" --output ./openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img
+    # Create the bootimg as it's the only format recognized by the Android bootloader
+    abootimg --create ./openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img -c kerneladdr=0x8000 \
+        -c ramdiskaddr=0x1000000 -c secondaddr=0x0 -c tagsaddr=0x100 -c pagesize=4096 \
+        -c cmdline="root=${ROOTPART} rootdelay=2 mobileroot=${ROOTPART} loglevel=7 splash=silent console=ttyMSM0,115200 console=tty0 BOOT_IMAGE=/boot/Image" \
+        -k /tmp/kernel-dtb -r ${MOUNTED_IMAGE_DIR}/boot/initrd-${kernel_version}
+
+    #mkbootimg --kernel /tmp/kernel-dtb --ramdisk ${initrd_file_path} --pagesize 4096 \
+    #    --base 0x0 --kernel_offset 0x8000 --second_offset 0x0 --tags_offset 0x100 --ramdisk_offset 0x1000000 \
+    #    --cmdline "BOOT_IMAGE=/boot/Image root=${ROOTPART} console=ttyMSM0,115200 loglevel=7" \
+    #    --output openSUSE-Tumbleweed-ARM-PHOSH-${DEVICE}${variant}.aarch64.boot.img
 
 done
