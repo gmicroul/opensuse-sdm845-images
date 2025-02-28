@@ -17,7 +17,8 @@ jobs:
     
     - run: |
         sudo apt update
-        sudo apt install abootimg img2simg
+        sudo apt install abootimg android-sdk-libsparse-utils 
+        #img2simg
         git clone https://github.com/osm0sis/mkbootimg
         cd mkbootimg
         make
