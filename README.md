@@ -27,6 +27,7 @@ wifi
 bluetooth
 sound (Earpiece.../not speaker)
 power
+docker
 
 Not working:
 camera
