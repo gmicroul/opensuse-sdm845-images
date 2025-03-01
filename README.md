@@ -16,3 +16,8 @@ Put your device in fastboot mode, and execute:
    * fastboot erase dtbo
    
 
+After flashed. Please enable sshd via command: sudo systemctl enable sshd && sudo systemctl start sshd
+
+And setting your timezone
+
+sudo timedatectl set-timezone Asia/Shanghai  
