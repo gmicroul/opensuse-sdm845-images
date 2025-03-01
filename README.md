@@ -21,3 +21,15 @@ After flashed. Please enable sshd via command: sudo systemctl enable sshd && sud
 And setting your timezone
 
 sudo timedatectl set-timezone Asia/Shanghai  
+
+working:
+wifi
+bluetooth
+sound (Earpiece.../not speaker)
+power
+
+Not working:
+camera
+
+Not tested:
+sms function (no need as this used to server function purpose)
