@@ -17,7 +17,7 @@ jobs:
     
     - run: |
         sudo apt update
-        sudo apt install abootimg android-sdk-libsparse-utils android-tools-mkbootimg
+        sudo apt install abootimg android-sdk-libsparse-utils mkbootimg
         #git clone https://github.com/osm0sis/mkbootimg
         #cd mkbootimg
         #make
