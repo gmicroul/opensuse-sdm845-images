@@ -17,12 +17,12 @@ jobs:
     
     - run: |
         sudo apt update
-        sudo apt install abootimg android-sdk-libsparse-utils
-        git clone https://github.com/osm0sis/mkbootimg
-        cd mkbootimg
-        make
-        sudo make install
-        cd ..
+        sudo apt install abootimg android-sdk-libsparse-utils android-tools-mkbootimg
+        #git clone https://github.com/osm0sis/mkbootimg
+        #cd mkbootimg
+        #make
+        #sudo make install
+        #cd ..
         sudo bash all.sh
         ls -ltrh
          
