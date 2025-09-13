@@ -10,7 +10,7 @@ on:
 
 jobs:
   once:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     name: Create GitHub release
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}${{ steps.create_nightly.outputs.upload_url }}
