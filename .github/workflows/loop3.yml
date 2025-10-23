@@ -44,9 +44,9 @@ jobs:
     - name: Upload image to Release
       uses: ncipollo/release-action@main
       with:
-        tag: opensuse_for_fajita-20251020
+        tag: opensuse_for_fajita-20251023
         artifacts: './tempzip/openSUSE-Tumbleweed-ARM-PHOSH-oneplus6t.zip'
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
         body: |
-            opensuse_for_fajita-20251020
+            opensuse_for_fajita-20251023
