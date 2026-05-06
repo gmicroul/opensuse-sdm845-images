@@ -1,0 +1,75 @@
+name: Auto Build — find latest image & package
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"   # 每天6点UTC自动检查
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y abootimg android-sdk-libsparse-utils mkbootimg
+
+    - name: Fetch latest raw image name from OBS
+      id: find_image
+      run: |
+        echo "Fetching image list from OBS..."
+        IMG_URL="https://download.opensuse.org/repositories/home:/alefnode:/sdm845/images/"
+        LATEST=$(curl -sL "$IMG_URL" \
+          | grep -oP 'openSUSE-Tumbleweed-ARM-PHOSH-oneplus6[^"]*\.raw\.xz' \
+          | sort -V \
+          | tail -1)
+        echo "Latest image: $LATEST"
+        echo "image_name=$LATEST" >> $GITHUB_OUTPUT
+
+    - name: Update .env with latest image
+      run: |
+        IMAGE_NAME="${{ steps.find_image.outputs.image_name }}"
+        if grep -q "^OPENSUSE_RAW_FILE=" .env; then
+          sed -i "s|^OPENSUSE_RAW_FILE=.*|OPENSUSE_RAW_FILE=$IMAGE_NAME|" .env
+        else
+          echo "OPENSUSE_RAW_FILE=$IMAGE_NAME" >> .env
+        fi
+        echo "=== Updated .env ==="
+        cat .env
+
+    - name: Run full packaging (all.sh)
+      run: |
+        sudo bash all.sh
+        ls -ltrh
+
+    - name: Collect output images
+      run: |
+        mkdir -p tempzip
+        mv *oneplus6*.img tempzip/ 2>/dev/null || true
+        cd tempzip
+        ZIP_NAME="openSUSE-Tumbleweed-ARM-PHOSH-oneplus6t.zip"
+        zip "$ZIP_NAME" *oneplus6*.img
+        ls -ltrh
+        echo "zip_name=$ZIP_NAME" >> $GITHUB_OUTPUT
+        cd ..
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4.3.0
+      with:
+        name: openSUSE-Tumbleweed-ARM-PHOSH-oneplus6
+        path: ./tempzip/openSUSE-Tumbleweed-ARM-PHOSH-oneplus6t.zip
+
+    - name: Upload image to Release
+      uses: ncipollo/release-action@main
+      with:
+        tag: opensuse_for_fajita-auto
+        artifacts: './tempzip/openSUSE-Tumbleweed-ARM-PHOSH-oneplus6t.zip'
+        allowUpdates: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        body: |
+          Auto-built openSUSE Tumbleweed PHOSH for OnePlus 6/6T
+          Image: ${{ steps.find_image.outputs.image_name }}
