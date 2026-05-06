@@ -2,11 +2,11 @@ name: opensuse images release
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - '**'
-  schedule:
-    - cron: "59 23 * * *"
+#  push:
+#    tags:
+#      - '**'
+#  schedule:
+#    - cron: "59 23 * * *"
 
 jobs:
   once:
