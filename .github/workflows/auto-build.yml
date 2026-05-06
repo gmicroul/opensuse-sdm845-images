@@ -63,6 +63,18 @@ jobs:
         name: openSUSE-Tumbleweed-ARM-PHOSH-oneplus6
         path: ./tempzip/openSUSE-Tumbleweed-ARM-PHOSH-oneplus6t.zip
 
+    - name: Commit updated .env back to repo
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add .env
+        if git diff --cached --quiet; then
+          echo "No change to .env"
+        else
+          git commit -m "auto: update OPENSUSE_RAW_FILE to ${{ steps.find_image.outputs.image_name }}"
+          git push
+        fi
+
     - name: Upload image to Release
       uses: ncipollo/release-action@main
       with:
